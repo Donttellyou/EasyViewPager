@@ -25,8 +25,18 @@
     [self.leftTabHost setTitle:@"Drinks"];
     [self.leftTabHost setSelected:YES];
     
+    [self.leftTabHost onClick:^(EKTabHost *tabHost) {
+        [self.rightTabHost setSelected:NO];
+        [self.leftTabHost setSelected:YES];
+    }];
+    
     self.rightTabHost.contentView = [[UICustomView alloc] init];
     self.rightTabHost.selectedColor = [UIColor blueColor];
+
+    [self.rightTabHost onClick:^(EKTabHost *tabHost) {
+        [self.leftTabHost setSelected:NO];
+        [self.rightTabHost setSelected:YES];
+    }];
     
 }
 

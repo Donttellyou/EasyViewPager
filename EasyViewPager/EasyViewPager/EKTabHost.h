@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class EKTabHost;
+
+typedef void (^TabHostBlock)(EKTabHost *tabHost);
+
 @interface EKTabHost : UIView
 
 @property (nonatomic, strong) UIColor  *selectedColor;
@@ -21,5 +25,6 @@
 @property (nonatomic, assign, getter = isSelected) BOOL selected;
 
 - (void)setTitle:(NSString *)title;
+- (void)onClick:(TabHostBlock)tabHostBlock;
 
 @end

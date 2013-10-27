@@ -55,6 +55,10 @@ SPEC_BEGIN(EKTabHostSped)
             [[tabHost should] respondToSelector:@selector(setTitle:)];
         });
         
+        it(@"should respond to onClick:", ^{
+            [[tabHost should] respondToSelector:@selector(onClick:)];
+        });
+        
     });
 
     describe(@"#initWithFrame:", ^{

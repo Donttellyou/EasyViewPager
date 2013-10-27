@@ -7,6 +7,9 @@
 //
 
 #import "EKTabHost.h"
+#import <objc/runtime.h>
+
+static char BlockKey;
 
 @implementation EKTabHost
 
@@ -160,6 +163,21 @@
 - (UIColor *)defaultColor
 {
     return [UIColor colorWithWhite:197.0/255.0 alpha:0.75];
+}
+
+- (void)onClick:(TabHostBlock)tabHostBlock
+{
+    objc_setAssociatedObject(self, &BlockKey, tabHostBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(executeBlock:)];
+    [self addGestureRecognizer:tapGesture];
+}
+
+- (void)executeBlock:(UIGestureRecognizer *)gesture
+{
+    TabHostBlock block = objc_getAssociatedObject(self, &BlockKey);
+    if (block) {
+        block(self);
+    }
 }
 
 @end
