@@ -33,6 +33,10 @@ SPEC_BEGIN(EKTabHostsContainerSpec)
             [[container should] respondToSelector:@selector(delegate)];
         });
         
+        it(@"should have a selectedIndex", ^{
+            [[container should] respondToSelector:@selector(selectedIndex)];
+        });
+        
     });
 
     describe(@"methods", ^{

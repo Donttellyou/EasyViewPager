@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSArray *tabs;
+@property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, assign) id<EKTabHostDataSource> dataSource;
 @property (nonatomic, assign) id<EKTabHostDelegate> delegate;
 

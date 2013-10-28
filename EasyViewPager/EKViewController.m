@@ -41,6 +41,7 @@
     self.container.dataSource = self;
     self.container.delegate = self;
     [self.container reloadData];
+    [[self.container tabHostAtIndex:self.container.selectedIndex] setSelected:YES];
     
 }
 
@@ -64,6 +65,22 @@
 - (IBAction)changeToLargerText:(id)sender
 {
     [_rightTabHost setTitle:@"Some larger text that fits"];
+}
+
+- (IBAction)reloadTabHostsContainerTapped:(id)sender
+{
+    [self.container reloadData];
+}
+
+- (IBAction)shouldScrollTabHostsContainer:(id)sender
+{
+    EKTabHost *tabHost = [self.container tabHostAtIndex:2];
+    
+    [UIView animateWithDuration:0.8 animations:^{
+        self.container.scrollView.contentOffset = tabHost.frame.origin;
+        [tabHost setSelected:YES];
+    }];
+    
 }
 
 #pragma mark - EKTabHostDataSource

@@ -41,7 +41,9 @@
     self.scrollView.backgroundColor = [UIColor clearColor];
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
     [self addSubview:self.scrollView];
+    self.selectedIndex = 0;
 }
 
 - (void)reloadData
@@ -105,10 +107,23 @@
     
     if ([self.delegate respondsToSelector:@selector(tabHostsContainer:didSelectTabHostAtIndex:)]) {
         [tabHost onClick:^(EKTabHost *tabHost) {
+            [self moveToCorrectPointOfScrollViewAtIndex:index];
             [self unselectAllTabHosts];
             [tabHost setSelected:YES];
             [self.delegate tabHostsContainer:self didSelectTabHostAtIndex:index];
         }];
+    }
+}
+
+- (void)moveToCorrectPointOfScrollViewAtIndex:(NSInteger)index
+{
+    if (index > 0 && index < ([_tabsArray count] - 1)) {
+        
+        [UIView animateWithDuration:0.6 animations:^{
+            CGPoint point = [[_tabsArray objectAtIndex:index-1] frame].origin;
+            self.scrollView.contentOffset = point;
+        }];
+        
     }
 }
 
