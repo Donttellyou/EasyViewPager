@@ -142,7 +142,6 @@
     if ([self.delegate respondsToSelector:@selector(tabHostsContainer:titleFontForTabHostAtIndex:)]) {
         [tabHost setTitleFont:[self.delegate tabHostsContainer:self titleFontForTabHostAtIndex:index]];
     }
-    
 }
 
 - (EKTabHost *)createTabHostForViewAtIndex:(NSInteger)index withCapacity:(NSInteger)capacity

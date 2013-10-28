@@ -70,7 +70,7 @@
 
 - (NSInteger)numberOfTabHostsWithContainer:(EKTabHostsContainer *)container
 {
-    return 4;
+    return 10;
 }
 
 - (NSString *)tabHostsContainer:(EKTabHostsContainer *)container titleAtIndex:(NSInteger)index
