@@ -42,6 +42,7 @@
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.scrollEnabled = NO;
     [self addSubview:self.scrollView];
     self.selectedIndex = 0;
 }
