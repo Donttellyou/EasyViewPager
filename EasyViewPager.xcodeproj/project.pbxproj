@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		026EF001181D9CED0018D6D0 /* EKTabHostsContainerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 026EF000181D9CED0018D6D0 /* EKTabHostsContainerSpec.m */; };
+		026EF004181D9D2D0018D6D0 /* EKTabHostsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 026EF003181D9D2D0018D6D0 /* EKTabHostsContainer.m */; };
+		026EF005181D9D600018D6D0 /* EKTabHostsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 026EF003181D9D2D0018D6D0 /* EKTabHostsContainer.m */; };
+		026EF00D181DE7150018D6D0 /* FakeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 026EF00C181DE7150018D6D0 /* FakeDataSource.m */; };
+		026EF010181DEF430018D6D0 /* IncompleteFakeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 026EF00F181DEF430018D6D0 /* IncompleteFakeDataSource.m */; };
 		02B17DEE181B0FCD00710B65 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B17DED181B0FCD00710B65 /* Foundation.framework */; };
 		02B17DF0181B0FCD00710B65 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B17DEF181B0FCD00710B65 /* CoreGraphics.framework */; };
 		02B17DF2181B0FCD00710B65 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B17DF1181B0FCD00710B65 /* UIKit.framework */; };
@@ -40,6 +45,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		026EF000181D9CED0018D6D0 /* EKTabHostsContainerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKTabHostsContainerSpec.m; sourceTree = "<group>"; };
+		026EF002181D9D2D0018D6D0 /* EKTabHostsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKTabHostsContainer.h; sourceTree = "<group>"; };
+		026EF003181D9D2D0018D6D0 /* EKTabHostsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKTabHostsContainer.m; sourceTree = "<group>"; };
+		026EF006181DB49E0018D6D0 /* EKTabHostDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKTabHostDataSource.h; sourceTree = "<group>"; };
+		026EF009181DB4D20018D6D0 /* EKTabHostDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKTabHostDelegate.h; sourceTree = "<group>"; };
+		026EF00B181DE7150018D6D0 /* FakeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeDataSource.h; sourceTree = "<group>"; };
+		026EF00C181DE7150018D6D0 /* FakeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeDataSource.m; sourceTree = "<group>"; };
+		026EF00E181DEF430018D6D0 /* IncompleteFakeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncompleteFakeDataSource.h; sourceTree = "<group>"; };
+		026EF00F181DEF430018D6D0 /* IncompleteFakeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncompleteFakeDataSource.m; sourceTree = "<group>"; };
 		02B17DEA181B0FCD00710B65 /* EasyViewPager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyViewPager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02B17DED181B0FCD00710B65 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02B17DEF181B0FCD00710B65 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -97,6 +111,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		026EF00A181DE6D60018D6D0 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				026EF00B181DE7150018D6D0 /* FakeDataSource.h */,
+				026EF00C181DE7150018D6D0 /* FakeDataSource.m */,
+				026EF00E181DEF430018D6D0 /* IncompleteFakeDataSource.h */,
+				026EF00F181DEF430018D6D0 /* IncompleteFakeDataSource.m */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
 		02B17DE1181B0FCD00710B65 = {
 			isa = PBXGroup;
 			children = (
@@ -162,7 +187,9 @@
 		02B17E12181B0FCE00710B65 /* EasyViewPagerTests */ = {
 			isa = PBXGroup;
 			children = (
+				026EF00A181DE6D60018D6D0 /* Factories */,
 				02B17E22181B126D00710B65 /* EKTabHostSpec.m */,
+				026EF000181D9CED0018D6D0 /* EKTabHostsContainerSpec.m */,
 				02B17E13181B0FCE00710B65 /* Supporting Files */,
 			);
 			path = EasyViewPagerTests;
@@ -182,6 +209,10 @@
 			children = (
 				02B17E25181B132C00710B65 /* EKTabHost.h */,
 				02B17E26181B132C00710B65 /* EKTabHost.m */,
+				026EF002181D9D2D0018D6D0 /* EKTabHostsContainer.h */,
+				026EF003181D9D2D0018D6D0 /* EKTabHostsContainer.m */,
+				026EF006181DB49E0018D6D0 /* EKTabHostDataSource.h */,
+				026EF009181DB4D20018D6D0 /* EKTabHostDelegate.h */,
 			);
 			path = EasyViewPager;
 			sourceTree = "<group>";
@@ -367,6 +398,7 @@
 				02B17DFE181B0FCD00710B65 /* EKAppDelegate.m in Sources */,
 				02B17DFA181B0FCD00710B65 /* main.m in Sources */,
 				02B17E27181B132C00710B65 /* EKTabHost.m in Sources */,
+				026EF004181D9D2D0018D6D0 /* EKTabHostsContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,8 +406,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				026EF010181DEF430018D6D0 /* IncompleteFakeDataSource.m in Sources */,
+				026EF001181D9CED0018D6D0 /* EKTabHostsContainerSpec.m in Sources */,
 				02B17E23181B126D00710B65 /* EKTabHostSpec.m in Sources */,
 				02B17E28181B132C00710B65 /* EKTabHost.m in Sources */,
+				026EF00D181DE7150018D6D0 /* FakeDataSource.m in Sources */,
+				026EF005181D9D600018D6D0 /* EKTabHostsContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
