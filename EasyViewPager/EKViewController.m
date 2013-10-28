@@ -38,6 +38,10 @@
         [self.rightTabHost setSelected:YES];
     }];
     
+    self.container.dataSource = self;
+    self.container.delegate = self;
+    [self.container reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,6 +64,40 @@
 - (IBAction)changeToLargerText:(id)sender
 {
     [_rightTabHost setTitle:@"Some larger text that fits"];
+}
+
+#pragma mark - EKTabHostDataSource
+
+- (NSInteger)numberOfTabHostsWithContainer:(EKTabHostsContainer *)container
+{
+    return 4;
+}
+
+- (NSString *)tabHostsContainer:(EKTabHostsContainer *)container titleAtIndex:(NSInteger)index
+{
+    return [NSString stringWithFormat:@"Title %d", index];
+}
+
+#pragma mark - EKTabHostDelegate
+
+- (void)tabHostsContainer:(EKTabHostsContainer *)container didSelectTabHostAtIndex:(NSInteger)index
+{
+    NSLog(@"Clicked at index %d", index);
+}
+
+- (UIColor *)tabHostsContainer:(EKTabHostsContainer *)container selectedColorForTabHostAtIndex:(NSInteger)index
+{
+    return [UIColor redColor];
+}
+
+- (UIColor *)tabHostsContainer:(EKTabHostsContainer *)container titleColorForTabHostAtIndex:(NSInteger)index
+{
+    return [UIColor blueColor];
+}
+
+- (UIFont *)tabHostsContainer:(EKTabHostsContainer *)container titleFontForTabHostAtIndex:(NSInteger)index
+{
+    return [UIFont systemFontOfSize:14.0f];
 }
 
 @end

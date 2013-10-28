@@ -14,4 +14,10 @@
 
 - (void)tabHostsContainer:(EKTabHostsContainer *)container didSelectTabHostAtIndex:(NSInteger)index;
 
+- (UIColor *)tabHostsContainer:(EKTabHostsContainer *)container topColorForTabHostAtIndex:(NSInteger)index;
+- (UIColor *)tabHostsContainer:(EKTabHostsContainer *)container bottomColorForTabHostAtIndex:(NSInteger)index;
+- (UIColor *)tabHostsContainer:(EKTabHostsContainer *)container selectedColorForTabHostAtIndex:(NSInteger)index;
+- (UIColor *)tabHostsContainer:(EKTabHostsContainer *)container titleColorForTabHostAtIndex:(NSInteger)index;
+- (UIFont  *)tabHostsContainer:(EKTabHostsContainer *)container titleFontForTabHostAtIndex:(NSInteger)index;
+
 @end

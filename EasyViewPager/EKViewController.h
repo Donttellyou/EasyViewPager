@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EKTabHostDataSource.h"
+#import "EKTabHostDelegate.h"
+#import "EKTabHostsContainer.h"
 #import "EKTabHost.h"
 
 
-@interface EKViewController : UIViewController
+@interface EKViewController : UIViewController < EKTabHostDataSource, EKTabHostDelegate >
+
+@property (nonatomic, weak) IBOutlet EKTabHostsContainer *container;
 
 @property (nonatomic, weak) IBOutlet EKTabHost *leftTabHost;
 @property (nonatomic, weak) IBOutlet EKTabHost *rightTabHost;

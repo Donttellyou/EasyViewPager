@@ -37,10 +37,11 @@
 
 - (void)commonSetup
 {
-    self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds))];
     self.scrollView.backgroundColor = [UIColor clearColor];
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
+    [self addSubview:self.scrollView];
 }
 
 - (void)reloadData
@@ -84,6 +85,9 @@
         [self createViewForIndex:i withCapacity:capacity];
     }
     self.tabs = _tabsArray;
+    CGFloat width = [self tabHostWidthWithCapacity:[self.tabs count]] * [self.tabs count];
+    CGFloat height = CGRectGetHeight(self.scrollView.frame);
+    self.scrollView.contentSize = CGSizeMake(width, height);
 }
 
 - (void)createViewForIndex:(NSInteger)index withCapacity:(NSInteger)capacity;
@@ -101,48 +105,72 @@
     
     if ([self.delegate respondsToSelector:@selector(tabHostsContainer:didSelectTabHostAtIndex:)]) {
         [tabHost onClick:^(EKTabHost *tabHost) {
-            [[self.scrollView subviews] makeObjectsPerformSelector:@selector(setSelected:) withObject:[NSNumber numberWithBool:NO]];
+            [self unselectAllTabHosts];
             [tabHost setSelected:YES];
             [self.delegate tabHostsContainer:self didSelectTabHostAtIndex:index];
         }];
     }
-    
-    CGFloat width = CGRectGetWidth(self.scrollView.frame) * [self.tabs count];
-    CGFloat height = CGRectGetHeight(self.scrollView.frame);
-    self.scrollView.contentSize = CGSizeMake(width, height);
-    
 }
 
 - (EKTabHost *)createTabHostForTitleAtIndex:(NSInteger)index withCapacity:(NSInteger)capacity
 {
-    EKTabHost *tabHost;
-    if (capacity == 1) {
-        tabHost = [[EKTabHost alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
-    } else if (capacity == 2) {
-        CGFloat witdh = CGRectGetWidth(self.frame)/2;
-        tabHost = [[EKTabHost alloc] initWithFrame:CGRectMake(witdh * index, 0, witdh, CGRectGetHeight(self.frame))];
-    } else {
-        CGFloat witdh = CGRectGetWidth(self.frame)/3;
-        tabHost = [[EKTabHost alloc] initWithFrame:CGRectMake(witdh * index, 0, witdh, CGRectGetHeight(self.frame))];
-    }
+    CGFloat width = [self tabHostWidthWithCapacity:capacity];
+    EKTabHost *tabHost = [[EKTabHost alloc] initWithFrame:CGRectMake(width * index, 0, width, CGRectGetHeight(self.frame))];
+    [self customizeTabHost:tabHost withTitlePropertiesAtIndex:index];
     [tabHost setTitle:[self.dataSource tabHostsContainer:self titleAtIndex:index]];
     return tabHost;
 }
 
+- (void)customizeTabHost:(EKTabHost *)tabHost withTitlePropertiesAtIndex:(NSInteger)index
+{
+    if ([self.delegate respondsToSelector:@selector(tabHostsContainer:topColorForTabHostAtIndex:)]) {
+        [tabHost setTopColor:[self.delegate tabHostsContainer:self topColorForTabHostAtIndex:index]];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(tabHostsContainer:bottomColorForTabHostAtIndex:)]) {
+        [tabHost setBottomColor:[self.delegate tabHostsContainer:self bottomColorForTabHostAtIndex:index]];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(tabHostsContainer:selectedColorForTabHostAtIndex:)]) {
+        [tabHost setSelectedColor:[self.delegate tabHostsContainer:self selectedColorForTabHostAtIndex:index]];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(tabHostsContainer:titleColorForTabHostAtIndex:)]) {
+        [tabHost setTitleColor:[self.delegate tabHostsContainer:self titleColorForTabHostAtIndex:index]];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(tabHostsContainer:titleFontForTabHostAtIndex:)]) {
+        [tabHost setTitleFont:[self.delegate tabHostsContainer:self titleFontForTabHostAtIndex:index]];
+    }
+    
+}
+
 - (EKTabHost *)createTabHostForViewAtIndex:(NSInteger)index withCapacity:(NSInteger)capacity
 {
-    EKTabHost *tabHost;
-    if (capacity == 1) {
-        tabHost = [[EKTabHost alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
-    } else if (capacity == 2) {
-        CGFloat witdh = CGRectGetWidth(self.frame)/2;
-        tabHost = [[EKTabHost alloc] initWithFrame:CGRectMake(witdh * index, 0, witdh, CGRectGetHeight(self.frame))];
-    } else {
-        CGFloat witdh = CGRectGetWidth(self.frame)/3;
-        tabHost = [[EKTabHost alloc] initWithFrame:CGRectMake(witdh * index, 0, witdh, CGRectGetHeight(self.frame))];
-    }
+    CGFloat width = [self tabHostWidthWithCapacity:capacity];
+    EKTabHost *tabHost = [[EKTabHost alloc] initWithFrame:CGRectMake(width * index, 0, width, CGRectGetHeight(self.frame))];
     [tabHost setContentView:[self.dataSource tabHostsContainer:self viewAtIndex:index]];
     return tabHost;
+}
+
+- (void)unselectAllTabHosts
+{
+    for (EKTabHost *tabHost in self.tabs) {
+        [tabHost setSelected:NO];
+    }
+}
+
+- (NSInteger)tabHostWidthWithCapacity:(NSInteger)capacity
+{
+    switch (capacity) {
+        case 1:
+            return CGRectGetWidth(self.frame);
+        case 2:
+            return CGRectGetWidth(self.frame) / 2;
+        default:
+            return ceilf(CGRectGetWidth(self.frame) / 3);
+    }
+    
 }
 
 - (NSInteger)indexForTabHost:(EKTabHost *)tabHost
