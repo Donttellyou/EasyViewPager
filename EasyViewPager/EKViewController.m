@@ -72,17 +72,6 @@
     [self.container reloadData];
 }
 
-- (IBAction)shouldScrollTabHostsContainer:(id)sender
-{
-    EKTabHost *tabHost = [self.container tabHostAtIndex:2];
-    
-    [UIView animateWithDuration:0.8 animations:^{
-        self.container.scrollView.contentOffset = tabHost.frame.origin;
-        [tabHost setSelected:YES];
-    }];
-    
-}
-
 #pragma mark - EKTabHostDataSource
 
 - (NSInteger)numberOfTabHostsWithContainer:(EKTabHostsContainer *)container
