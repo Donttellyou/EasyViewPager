@@ -97,7 +97,7 @@
 {
     EKTabHost *tabHost;
     if ([self.dataSource respondsToSelector:@selector(tabHostsContainer:titleAtIndex:)] &&
-        ![self.dataSource respondsToSelector:@selector(tabHostsContainer:viewAtIndex:)]) {
+        (![self.dataSource respondsToSelector:@selector(tabHostsContainer:viewAtIndex:)] || ![self.dataSource tabHostsContainer:self viewAtIndex:index])) {
         tabHost = [self createTabHostForTitleAtIndex:index withCapacity:capacity];
     } else {
         tabHost = [self createTabHostForViewAtIndex:index withCapacity:capacity];
@@ -120,10 +120,10 @@
 {
     if (index > 0 && index < ([_tabsArray count] - 1)) {
         
-        [UIView animateWithDuration:0.6 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             CGPoint point = [[_tabsArray objectAtIndex:index-1] frame].origin;
             self.scrollView.contentOffset = point;
-        }];
+         }];
         
     }
 }

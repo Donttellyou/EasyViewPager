@@ -28,6 +28,12 @@
 		02B17E23181B126D00710B65 /* EKTabHostSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B17E22181B126D00710B65 /* EKTabHostSpec.m */; };
 		02B17E27181B132C00710B65 /* EKTabHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B17E26181B132C00710B65 /* EKTabHost.m */; };
 		02B17E28181B132C00710B65 /* EKTabHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B17E26181B132C00710B65 /* EKTabHost.m */; };
+		02C13B65181F316E00837CD6 /* EKViewPagerExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C13B64181F316E00837CD6 /* EKViewPagerExampleViewController.m */; };
+		02C13B67181F31B600837CD6 /* EKViewPagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C13B66181F31B600837CD6 /* EKViewPagerSpec.m */; };
+		02C13B6A181F320100837CD6 /* EKViewPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C13B69181F320100837CD6 /* EKViewPager.m */; };
+		02C13B6B181F320100837CD6 /* EKViewPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C13B69181F320100837CD6 /* EKViewPager.m */; };
+		02C13B71181F65B300837CD6 /* EKContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C13B70181F65B300837CD6 /* EKContainerViewController.m */; };
+		02C13B72181F65B300837CD6 /* EKContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C13B70181F65B300837CD6 /* EKContainerViewController.m */; };
 		02F1ADFA181C68940001F793 /* UICustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F1ADF9181C68940001F793 /* UICustomView.m */; };
 		02F1ADFC181C68C20001F793 /* UICustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02F1ADFB181C68C20001F793 /* UICustomView.xib */; };
 		855E6D4905354E01B5A3DCBB /* libPods-EasyViewPagerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB9EFCE779D46499E7CE8B8 /* libPods-EasyViewPagerTests.a */; };
@@ -75,6 +81,15 @@
 		02B17E22181B126D00710B65 /* EKTabHostSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKTabHostSpec.m; sourceTree = "<group>"; };
 		02B17E25181B132C00710B65 /* EKTabHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKTabHost.h; sourceTree = "<group>"; };
 		02B17E26181B132C00710B65 /* EKTabHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKTabHost.m; sourceTree = "<group>"; };
+		02C13B63181F316E00837CD6 /* EKViewPagerExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKViewPagerExampleViewController.h; sourceTree = "<group>"; };
+		02C13B64181F316E00837CD6 /* EKViewPagerExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKViewPagerExampleViewController.m; sourceTree = "<group>"; };
+		02C13B66181F31B600837CD6 /* EKViewPagerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKViewPagerSpec.m; sourceTree = "<group>"; };
+		02C13B68181F320100837CD6 /* EKViewPager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKViewPager.h; sourceTree = "<group>"; };
+		02C13B69181F320100837CD6 /* EKViewPager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKViewPager.m; sourceTree = "<group>"; };
+		02C13B6D181F447D00837CD6 /* EKViewPagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKViewPagerDelegate.h; sourceTree = "<group>"; };
+		02C13B6E181F449C00837CD6 /* EKViewPagerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKViewPagerDataSource.h; sourceTree = "<group>"; };
+		02C13B6F181F65B300837CD6 /* EKContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKContainerViewController.h; sourceTree = "<group>"; };
+		02C13B70181F65B300837CD6 /* EKContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKContainerViewController.m; sourceTree = "<group>"; };
 		02E509F7181B3CD60067B221 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		02F1ADF8181C68940001F793 /* UICustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomView.h; sourceTree = "<group>"; };
 		02F1ADF9181C68940001F793 /* UICustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomView.m; sourceTree = "<group>"; };
@@ -167,6 +182,10 @@
 				02B17DFF181B0FCD00710B65 /* Main.storyboard */,
 				02B17E02181B0FCD00710B65 /* EKViewController.h */,
 				02B17E03181B0FCD00710B65 /* EKViewController.m */,
+				02C13B63181F316E00837CD6 /* EKViewPagerExampleViewController.h */,
+				02C13B64181F316E00837CD6 /* EKViewPagerExampleViewController.m */,
+				02C13B6F181F65B300837CD6 /* EKContainerViewController.h */,
+				02C13B70181F65B300837CD6 /* EKContainerViewController.m */,
 				02B17E05181B0FCD00710B65 /* Images.xcassets */,
 				02B17DF4181B0FCD00710B65 /* Supporting Files */,
 			);
@@ -190,6 +209,7 @@
 				026EF00A181DE6D60018D6D0 /* Factories */,
 				02B17E22181B126D00710B65 /* EKTabHostSpec.m */,
 				026EF000181D9CED0018D6D0 /* EKTabHostsContainerSpec.m */,
+				02C13B66181F31B600837CD6 /* EKViewPagerSpec.m */,
 				02B17E13181B0FCE00710B65 /* Supporting Files */,
 			);
 			path = EasyViewPagerTests;
@@ -213,6 +233,10 @@
 				026EF003181D9D2D0018D6D0 /* EKTabHostsContainer.m */,
 				026EF006181DB49E0018D6D0 /* EKTabHostDataSource.h */,
 				026EF009181DB4D20018D6D0 /* EKTabHostDelegate.h */,
+				02C13B68181F320100837CD6 /* EKViewPager.h */,
+				02C13B69181F320100837CD6 /* EKViewPager.m */,
+				02C13B6D181F447D00837CD6 /* EKViewPagerDelegate.h */,
+				02C13B6E181F449C00837CD6 /* EKViewPagerDataSource.h */,
 			);
 			path = EasyViewPager;
 			sourceTree = "<group>";
@@ -393,7 +417,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C13B71181F65B300837CD6 /* EKContainerViewController.m in Sources */,
 				02B17E04181B0FCD00710B65 /* EKViewController.m in Sources */,
+				02C13B65181F316E00837CD6 /* EKViewPagerExampleViewController.m in Sources */,
+				02C13B6A181F320100837CD6 /* EKViewPager.m in Sources */,
 				02F1ADFA181C68940001F793 /* UICustomView.m in Sources */,
 				02B17DFE181B0FCD00710B65 /* EKAppDelegate.m in Sources */,
 				02B17DFA181B0FCD00710B65 /* main.m in Sources */,
@@ -406,11 +433,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C13B72181F65B300837CD6 /* EKContainerViewController.m in Sources */,
 				026EF010181DEF430018D6D0 /* IncompleteFakeDataSource.m in Sources */,
 				026EF001181D9CED0018D6D0 /* EKTabHostsContainerSpec.m in Sources */,
+				02C13B6B181F320100837CD6 /* EKViewPager.m in Sources */,
 				02B17E23181B126D00710B65 /* EKTabHostSpec.m in Sources */,
 				02B17E28181B132C00710B65 /* EKTabHost.m in Sources */,
 				026EF00D181DE7150018D6D0 /* FakeDataSource.m in Sources */,
+				02C13B67181F31B600837CD6 /* EKViewPagerSpec.m in Sources */,
 				026EF005181D9D600018D6D0 /* EKTabHostsContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

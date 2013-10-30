@@ -23,7 +23,9 @@
 - (void)reloadData;
 
 - (NSInteger)indexForTabHost:(EKTabHost *)tabHost;
-
 - (EKTabHost *)tabHostAtIndex:(NSInteger)index;
+
+- (void)moveToCorrectPointOfScrollViewAtIndex:(NSInteger)index;
+- (void)unselectAllTabHosts;
 
 @end
