@@ -15,12 +15,13 @@
 @interface EKViewPager : UIView
 
 @property (nonatomic, strong) EKTabHostsContainer *tabHostsContainer;
-@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, strong) UIScrollView        *contentView;
 
 @property (nonatomic, assign) IBOutlet id<EKViewPagerDataSource> dataSource;
 @property (nonatomic, assign) IBOutlet id<EKViewPagerDelegate> delegate;
 
 @property (nonatomic, assign) NSInteger currentIndex;
+@property (nonatomic, strong) NSArray   *contents;
 
 - (void)reloadData;
 

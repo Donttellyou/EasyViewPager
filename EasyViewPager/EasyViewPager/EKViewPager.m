@@ -11,13 +11,9 @@
 #import "EKTabHostsContainer.h"
 #import "EKTabHost.h"
 
-@interface EKViewPager() < UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate, EKTabHostDataSource, EKTabHostDelegate > {
-    BOOL _swiped;
-}
+@interface EKViewPager() < UIScrollViewDelegate, EKTabHostDataSource, EKTabHostDelegate >
 
-@property (nonatomic, strong) UIPageViewController *pageController;
-@property (nonatomic, weak)   UIScrollView *contentScrollView;
-@property (nonatomic, assign) CGFloat lastContentOffset;
+@property (nonatomic, strong) NSMutableArray *contentControllers;
 
 @end
 
@@ -27,7 +23,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _currentIndex = 0;
+        [self commontSetup];
     }
     return self;
 }
@@ -36,40 +32,63 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _currentIndex = 0;
+        [self commontSetup];
     }
     return self;
 }
 
-- (void)reloadData
+- (void)commontSetup
 {
-    self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
-                                                          navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                                                        options:nil];
-    self.pageController.dataSource = self;
-    self.pageController.delegate = self;
-    self.contentScrollView  = [self.pageController.view.subviews objectAtIndex:1];
-    self.pageController.view.backgroundColor = [UIColor clearColor];
-    self.contentScrollView.backgroundColor = [UIColor clearColor];
-    
     self.tabHostsContainer = [[EKTabHostsContainer alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), 44.0f)];
     self.tabHostsContainer.dataSource = self;
     self.tabHostsContainer.delegate = self;
-    [self.tabHostsContainer reloadData];
     [self addSubview:self.tabHostsContainer];
     
     CGRect contentFrame = CGRectMake(0, CGRectGetHeight(self.tabHostsContainer.frame), CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - CGRectGetHeight(self.tabHostsContainer.frame));
-    self.contentView = [[UIView alloc] initWithFrame:contentFrame];
-    [self.contentView addSubview:self.pageController.view];
+    self.contentView = [[UIScrollView alloc] initWithFrame:contentFrame];
+    self.contentView.backgroundColor = [UIColor clearColor];
+    self.contentView.showsHorizontalScrollIndicator = NO;
+    self.contentView.bounces = NO;
+    self.contentView.pagingEnabled = YES;
+    self.contentView.decelerationRate = UIScrollViewDecelerationRateFast;
+    self.contentView.delegate = self;
     [self addSubview:self.contentView];
     
-    UIViewController *firstViewController = [self.dataSource viewPager:self controllerAtIndex:self.currentIndex];
+}
+
+- (void)reloadData
+{
+    _currentIndex = 0;
     
-    NSArray *viewControllers = @[firstViewController];
-    [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
+    [self.tabHostsContainer reloadData];
     [[self.tabHostsContainer.tabs firstObject] setSelected:YES];
     
+    [[self.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+
+    [self createPages];
+}
+
+- (void)createPages
+{
+    NSInteger capacity  = [self.dataSource numberOfItemsForViewPager:self];
+    _contentControllers = [NSMutableArray arrayWithCapacity:capacity];
+    for (NSInteger i = 0; i < capacity; i++) {
+        
+        UIViewController *controller = [self.dataSource viewPager:self controllerAtIndex:i];
+        
+        UIView *controllerView = controller.view;
+        CGRect frame = controllerView.frame;
+        frame.origin.x = i * CGRectGetWidth(controllerView.bounds);
+        controllerView.frame = frame;
+        
+        [_contentControllers addObject:controllerView];
+        [self.contentView addSubview:controllerView];
+        
+    }
+    self.contents = _contentControllers;
+    CGFloat width = CGRectGetWidth(self.bounds) * [self.contents count];
+    CGFloat height = CGRectGetHeight(self.contentView.bounds);
+    self.contentView.contentSize = CGSizeMake(width, height);
 }
 
 #pragma mark - EKTabHostsDataSource
@@ -102,19 +121,17 @@
     
     if (self.currentIndex != index) {
         
-        UIPageViewControllerNavigationDirection direction;
-        
         if (index > self.currentIndex) {
-            direction = UIPageViewControllerNavigationDirectionForward;
+            self.currentIndex++;
         } else {
-            direction = UIPageViewControllerNavigationDirectionReverse;
+            self.currentIndex--;
         }
         
-        self.currentIndex = index;
         
-        UIViewController *viewController = [self.dataSource viewPager:self controllerAtIndex:self.currentIndex];
-        NSArray *viewControllers = @[viewController];
-        [self.pageController setViewControllers:viewControllers direction:direction animated:YES completion:nil];
+        [UIView animateWithDuration:0.2 animations:^{
+            CGPoint point = [[self.contentControllers objectAtIndex:self.currentIndex] frame].origin;
+            self.contentView.contentOffset = point;
+        }];
         
         if ([self.delegate respondsToSelector:@selector(viewPager:tabHostClickedAtIndex:)]) {
             [self.delegate viewPager:self tabHostClickedAtIndex:index];
@@ -164,61 +181,23 @@
     return nil;
 }
 
-#pragma mark - UIPageViewControllerDataSource
+#pragma mark - UIScrollViewDelegate
 
-- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
+- (void) scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
-    return [self.dataSource numberOfItemsForViewPager:self];
+    NSUInteger nearestIndex = (NSUInteger)(targetContentOffset->x / scrollView.bounds.size.width + 0.5f);
+    nearestIndex = MAX( MIN( nearestIndex, [self.contentControllers count] - 1 ), 0 );
+    self.currentIndex = nearestIndex;
 }
 
-- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
+- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    return _currentIndex;
-}
-
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
-{
-    NSInteger index = self.currentIndex - 1;
-    if (index < 0) {
-        return nil;
+    if (self.currentIndex >= 0 && self.currentIndex < [self.dataSource numberOfItemsForViewPager:self]) {
+        [self.tabHostsContainer unselectAllTabHosts];
+        [self.tabHostsContainer moveToCorrectPointOfScrollViewAtIndex:self.currentIndex];
+        [[self.tabHostsContainer tabHostAtIndex:self.currentIndex] setSelected:YES];
     }
-    return [self.dataSource viewPager:self controllerAtIndex:index];
-}
-
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
-{
-    NSInteger index = self.currentIndex + 1;
-    if (index >= [self.dataSource numberOfItemsForViewPager:self]) {
-        return nil;
-    }
-    return [self.dataSource viewPager:self controllerAtIndex:index];
-}
-
-#pragma mark - UIPageViewControllerDelegate
-
-- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
-{
-    _swiped = YES;
-    _lastContentOffset = self.contentScrollView.contentOffset.x;
-}
-
-- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed;
-{
-    if (completed && _swiped) {
-        
-        CGFloat actualOffset = self.contentScrollView.contentOffset.x;
-        
-        if (_lastContentOffset < actualOffset) {
-            self.currentIndex++;
-        }
-        else if (_lastContentOffset > actualOffset) {
-            self.currentIndex--;
-        }
-        [[self tabHostsContainer] moveToCorrectPointOfScrollViewAtIndex:self.currentIndex];
-        [[self tabHostsContainer] unselectAllTabHosts];
-        [[[self tabHostsContainer] tabHostAtIndex:self.currentIndex] setSelected:YES];
-        _swiped = NO;
-    }
+    [scrollView setContentOffset:CGPointMake(scrollView.bounds.size.width * self.currentIndex, 0) animated:YES];
 }
 
 @end
