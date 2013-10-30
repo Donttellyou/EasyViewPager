@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EKViewPagerController.h"
+#import "EasyViewPager.h"
 
 @interface EKThirdViewController : EKViewPagerController
 

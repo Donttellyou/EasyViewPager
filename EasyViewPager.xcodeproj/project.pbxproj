@@ -59,6 +59,7 @@
 		0265313018219DFC004EF607 /* EKViewPagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKViewPagerController.m; sourceTree = "<group>"; };
 		026531331821A866004EF607 /* EKThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKThirdViewController.h; sourceTree = "<group>"; };
 		026531341821A866004EF607 /* EKThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKThirdViewController.m; sourceTree = "<group>"; };
+		026531371821ACB0004EF607 /* EasyViewPager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyViewPager.h; sourceTree = "<group>"; };
 		026EF000181D9CED0018D6D0 /* EKTabHostsContainerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKTabHostsContainerSpec.m; sourceTree = "<group>"; };
 		026EF002181D9D2D0018D6D0 /* EKTabHostsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKTabHostsContainer.h; sourceTree = "<group>"; };
 		026EF003181D9D2D0018D6D0 /* EKTabHostsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKTabHostsContainer.m; sourceTree = "<group>"; };
@@ -249,6 +250,7 @@
 				02C13B6E181F449C00837CD6 /* EKViewPagerDataSource.h */,
 				0265312F18219DFC004EF607 /* EKViewPagerController.h */,
 				0265313018219DFC004EF607 /* EKViewPagerController.m */,
+				026531371821ACB0004EF607 /* EasyViewPager.h */,
 			);
 			path = EasyViewPager;
 			sourceTree = "<group>";
