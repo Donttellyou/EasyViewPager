@@ -25,7 +25,7 @@ SPEC_BEGIN(EKViewPagerSpec)
         });
         
         it(@"should have selected item", ^{
-            [[viewPager should] respondToSelector:@selector(selectedItem)];
+            [[viewPager should] respondToSelector:@selector(currentIndex)];
         });
         
         it(@"should have a dataSource", ^{

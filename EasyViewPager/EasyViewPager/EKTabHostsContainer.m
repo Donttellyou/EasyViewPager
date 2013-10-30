@@ -120,11 +120,11 @@
 {
     if (index > 0 && index < ([_tabsArray count] - 1)) {
         
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:0.2f animations:^{
             CGPoint point = [[_tabsArray objectAtIndex:index-1] frame].origin;
             self.scrollView.contentOffset = point;
         }];
-        
+    
     }
 }
 

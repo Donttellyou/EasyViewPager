@@ -31,6 +31,19 @@ static char BlockKey;
     return self;
 }
 
+
+- (void)setTitleColor:(UIColor *)titleColor
+{
+    _titleColor = titleColor;
+    [self applyTitleColor];
+}
+
+- (void)setTitleFont:(UIFont *)titleFont
+{
+    _titleFont = titleFont;
+    [self applyTitleFont];
+}
+
 - (void)commonSetup
 {
     self.backgroundColor = [UIColor clearColor];
@@ -64,8 +77,6 @@ static char BlockKey;
 {
     if ([self labelNotPrensent]) {
         self.contentView = [self newLabel];
-        [self applyTitleColor];
-        [self applyTitleFont];
     }
     UILabel *titleLabel = (UILabel *)self.contentView;
     titleLabel.text = title;

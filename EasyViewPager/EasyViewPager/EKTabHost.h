@@ -12,14 +12,14 @@
 
 typedef void (^TabHostBlock)(EKTabHost *tabHost);
 
-@interface EKTabHost : UIView
+@interface EKTabHost : UIView < UIAppearance >
 
-@property (nonatomic, strong) UIColor  *selectedColor;
+@property (nonatomic, strong) UIColor  *selectedColor UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) UIView   *contentView;
-@property (nonatomic, strong) UIColor  *bottomColor;
-@property (nonatomic, strong) UIColor  *titleColor;
-@property (nonatomic, strong) UIFont   *titleFont;
-@property (nonatomic, strong) UIColor  *topColor;
+@property (nonatomic, strong) UIColor  *bottomColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor  *titleColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIFont   *titleFont UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor  *topColor UI_APPEARANCE_SELECTOR;
 @property (nonatomic, copy)   NSString *title;
 
 @property (nonatomic, assign, getter = isSelected) BOOL selected;

@@ -107,16 +107,6 @@ SPEC_BEGIN(EKTabHostSped)
                     [tabHost setTitle:@"Some title"];
                 });
                 
-                it(@"should apply title font", ^{
-                    [[tabHost should] receive:@selector(applyTitleFont)];
-                    [tabHost setTitle:@"Some title"];
-                });
-                
-                it(@"should apply title color", ^{
-                    [[tabHost should] receive:@selector(applyTitleColor)];
-                    [tabHost setTitle:@"Some title"];
-                });
-                
             });
             
             context(@"when content view is already and uilabel", ^{
@@ -157,16 +147,6 @@ SPEC_BEGIN(EKTabHostSped)
                 
                 it(@"should not create a new label", ^{
                     [[tabHost should] receive:@selector(newLabel)];
-                    [tabHost setTitle:@"Some title"];
-                });
-                
-                it(@"should apply title font", ^{
-                    [[tabHost should] receive:@selector(applyTitleFont)];
-                    [tabHost setTitle:@"Some title"];
-                });
-                
-                it(@"should apply title color", ^{
-                    [[tabHost should] receive:@selector(applyTitleColor)];
                     [tabHost setTitle:@"Some title"];
                 });
                 

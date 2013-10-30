@@ -16,10 +16,8 @@
 
 - (void)viewPager:(EKViewPager *)viewPager tabHostClickedAtIndex:(NSInteger)index;
 
-- (UIColor *)viewPager:(EKViewPager *)viewPager topColorForTabHostAtIndex:(NSInteger)index;
-- (UIColor *)viewPager:(EKViewPager *)viewPager bottomColorForTabHostAtIndex:(NSInteger)index;
-- (UIColor *)viewPager:(EKViewPager *)viewPager selectedColorForTabHostAtIndex:(NSInteger)index;
-- (UIColor *)viewPager:(EKViewPager *)viewPager titleColorForTabHostAtIndex:(NSInteger)index;
-- (UIFont  *)viewPager:(EKViewPager *)viewPager titleFontForTabHostAtIndex:(NSInteger)index;
+- (void)viewPager:(EKViewPager *)viewPager willMoveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;
+
+- (void)viewPager:(EKViewPager *)viewPager didMoveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;
 
 @end

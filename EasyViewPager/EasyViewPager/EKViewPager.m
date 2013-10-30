@@ -11,7 +11,9 @@
 #import "EKTabHostsContainer.h"
 #import "EKTabHost.h"
 
-@interface EKViewPager() < UIScrollViewDelegate, EKTabHostDataSource, EKTabHostDelegate >
+@interface EKViewPager() < UIScrollViewDelegate, EKTabHostDataSource, EKTabHostDelegate > {
+    NSInteger _previousIndex;
+}
 
 @property (nonatomic, strong) NSMutableArray *contentControllers;
 
@@ -118,7 +120,6 @@
 
 - (void)tabHostsContainer:(EKTabHostsContainer *)container didSelectTabHostAtIndex:(NSInteger)index
 {
-    
     if (self.currentIndex != index) {
         
         if (index > self.currentIndex) {
@@ -126,7 +127,6 @@
         } else {
             self.currentIndex--;
         }
-        
         
         [UIView animateWithDuration:0.2 animations:^{
             CGPoint point = [[self.contentControllers objectAtIndex:self.currentIndex] frame].origin;
@@ -138,66 +138,41 @@
         }
         
     }
-    
-}
-
-- (UIColor *)tabHostsContainer:(EKTabHostsContainer *)container bottomColorForTabHostAtIndex:(NSInteger)index
-{
-    if ([self.delegate respondsToSelector:@selector(viewPager:bottomColorForTabHostAtIndex:)]) {
-        return [self.delegate viewPager:self bottomColorForTabHostAtIndex:index];
-    }
-    return nil;
-}
-
-- (UIColor *)tabHostsContainer:(EKTabHostsContainer *)container selectedColorForTabHostAtIndex:(NSInteger)index
-{
-    if ([self.delegate respondsToSelector:@selector(viewPager:selectedColorForTabHostAtIndex:)]) {
-        return [self.delegate viewPager:self selectedColorForTabHostAtIndex:index];
-    }
-    return nil;
-}
-
-- (UIColor *)tabHostsContainer:(EKTabHostsContainer *)container titleColorForTabHostAtIndex:(NSInteger)index
-{
-    if ([self.delegate respondsToSelector:@selector(viewPager:titleColorForTabHostAtIndex:)]) {
-        return [self.delegate viewPager:self titleColorForTabHostAtIndex:index];
-    }
-    return nil;
-}
-
-- (UIColor *)tabHostsContainer:(EKTabHostsContainer *)container topColorForTabHostAtIndex:(NSInteger)index
-{
-    if ([self.delegate respondsToSelector:@selector(viewPager:topColorForTabHostAtIndex:)]) {
-        return [self.delegate viewPager:self topColorForTabHostAtIndex:index];
-    }
-    return nil;
-}
-
-- (UIFont *)tabHostsContainer:(EKTabHostsContainer *)container titleFontForTabHostAtIndex:(NSInteger)index
-{
-    if ([self.delegate respondsToSelector:@selector(viewPager:titleFontForTabHostAtIndex:)]) {
-        return [self.delegate viewPager:self titleFontForTabHostAtIndex:index];
-    }
-    return nil;
 }
 
 #pragma mark - UIScrollViewDelegate
 
 - (void) scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
-    NSUInteger nearestIndex = (NSUInteger)(targetContentOffset->x / scrollView.bounds.size.width + 0.5f);
-    nearestIndex = MAX( MIN( nearestIndex, [self.contentControllers count] - 1 ), 0 );
-    self.currentIndex = nearestIndex;
+    if (scrollView == self.contentView) {
+        
+        _previousIndex = self.currentIndex;
+        NSUInteger nearestIndex = (NSUInteger)(targetContentOffset->x / scrollView.bounds.size.width + 0.5f);
+        nearestIndex = MAX( MIN( nearestIndex, [self.contentControllers count] - 1 ), 0 );
+        
+        if ([self.delegate respondsToSelector:@selector(viewPager:willMoveFromIndex:toIndex:)]) {
+            [self.delegate viewPager:self willMoveFromIndex:_previousIndex toIndex:nearestIndex];
+        }
+        
+        self.currentIndex = nearestIndex;
+    }
 }
 
 - (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (self.currentIndex >= 0 && self.currentIndex < [self.dataSource numberOfItemsForViewPager:self]) {
-        [self.tabHostsContainer unselectAllTabHosts];
-        [self.tabHostsContainer moveToCorrectPointOfScrollViewAtIndex:self.currentIndex];
-        [[self.tabHostsContainer tabHostAtIndex:self.currentIndex] setSelected:YES];
+    if (scrollView == self.contentView) {
+        if (self.currentIndex >= 0 && self.currentIndex < [self.dataSource numberOfItemsForViewPager:self]) {
+            
+            if ([self.delegate respondsToSelector:@selector(viewPager:didMoveFromIndex:toIndex:)]) {
+                [self.delegate viewPager:self didMoveFromIndex:_previousIndex toIndex:self.currentIndex];
+            }
+            
+            [self.tabHostsContainer unselectAllTabHosts];
+            [self.tabHostsContainer moveToCorrectPointOfScrollViewAtIndex:self.currentIndex];
+            [[self.tabHostsContainer tabHostAtIndex:self.currentIndex] setSelected:YES];
+        }
+        [scrollView setContentOffset:CGPointMake(scrollView.bounds.size.width * self.currentIndex, 0) animated:YES];
     }
-    [scrollView setContentOffset:CGPointMake(scrollView.bounds.size.width * self.currentIndex, 0) animated:YES];
 }
 
 @end

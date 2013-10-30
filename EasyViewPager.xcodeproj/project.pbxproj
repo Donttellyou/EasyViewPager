@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0265313118219DFC004EF607 /* EKViewPagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0265313018219DFC004EF607 /* EKViewPagerController.m */; };
+		0265313218219DFC004EF607 /* EKViewPagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0265313018219DFC004EF607 /* EKViewPagerController.m */; };
+		026531351821A866004EF607 /* EKThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 026531341821A866004EF607 /* EKThirdViewController.m */; };
+		026531361821A866004EF607 /* EKThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 026531341821A866004EF607 /* EKThirdViewController.m */; };
 		026EF001181D9CED0018D6D0 /* EKTabHostsContainerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 026EF000181D9CED0018D6D0 /* EKTabHostsContainerSpec.m */; };
 		026EF004181D9D2D0018D6D0 /* EKTabHostsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 026EF003181D9D2D0018D6D0 /* EKTabHostsContainer.m */; };
 		026EF005181D9D600018D6D0 /* EKTabHostsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 026EF003181D9D2D0018D6D0 /* EKTabHostsContainer.m */; };
@@ -51,6 +55,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0265312F18219DFC004EF607 /* EKViewPagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKViewPagerController.h; sourceTree = "<group>"; };
+		0265313018219DFC004EF607 /* EKViewPagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKViewPagerController.m; sourceTree = "<group>"; };
+		026531331821A866004EF607 /* EKThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKThirdViewController.h; sourceTree = "<group>"; };
+		026531341821A866004EF607 /* EKThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKThirdViewController.m; sourceTree = "<group>"; };
 		026EF000181D9CED0018D6D0 /* EKTabHostsContainerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKTabHostsContainerSpec.m; sourceTree = "<group>"; };
 		026EF002181D9D2D0018D6D0 /* EKTabHostsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKTabHostsContainer.h; sourceTree = "<group>"; };
 		026EF003181D9D2D0018D6D0 /* EKTabHostsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKTabHostsContainer.m; sourceTree = "<group>"; };
@@ -186,6 +194,8 @@
 				02C13B64181F316E00837CD6 /* EKViewPagerExampleViewController.m */,
 				02C13B6F181F65B300837CD6 /* EKContainerViewController.h */,
 				02C13B70181F65B300837CD6 /* EKContainerViewController.m */,
+				026531331821A866004EF607 /* EKThirdViewController.h */,
+				026531341821A866004EF607 /* EKThirdViewController.m */,
 				02B17E05181B0FCD00710B65 /* Images.xcassets */,
 				02B17DF4181B0FCD00710B65 /* Supporting Files */,
 			);
@@ -237,6 +247,8 @@
 				02C13B69181F320100837CD6 /* EKViewPager.m */,
 				02C13B6D181F447D00837CD6 /* EKViewPagerDelegate.h */,
 				02C13B6E181F449C00837CD6 /* EKViewPagerDataSource.h */,
+				0265312F18219DFC004EF607 /* EKViewPagerController.h */,
+				0265313018219DFC004EF607 /* EKViewPagerController.m */,
 			);
 			path = EasyViewPager;
 			sourceTree = "<group>";
@@ -417,10 +429,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0265313118219DFC004EF607 /* EKViewPagerController.m in Sources */,
 				02C13B71181F65B300837CD6 /* EKContainerViewController.m in Sources */,
 				02B17E04181B0FCD00710B65 /* EKViewController.m in Sources */,
 				02C13B65181F316E00837CD6 /* EKViewPagerExampleViewController.m in Sources */,
 				02C13B6A181F320100837CD6 /* EKViewPager.m in Sources */,
+				026531351821A866004EF607 /* EKThirdViewController.m in Sources */,
 				02F1ADFA181C68940001F793 /* UICustomView.m in Sources */,
 				02B17DFE181B0FCD00710B65 /* EKAppDelegate.m in Sources */,
 				02B17DFA181B0FCD00710B65 /* main.m in Sources */,
@@ -433,10 +447,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0265313218219DFC004EF607 /* EKViewPagerController.m in Sources */,
 				02C13B72181F65B300837CD6 /* EKContainerViewController.m in Sources */,
 				026EF010181DEF430018D6D0 /* IncompleteFakeDataSource.m in Sources */,
 				026EF001181D9CED0018D6D0 /* EKTabHostsContainerSpec.m in Sources */,
 				02C13B6B181F320100837CD6 /* EKViewPager.m in Sources */,
+				026531361821A866004EF607 /* EKThirdViewController.m in Sources */,
 				02B17E23181B126D00710B65 /* EKTabHostSpec.m in Sources */,
 				02B17E28181B132C00710B65 /* EKTabHost.m in Sources */,
 				026EF00D181DE7150018D6D0 /* FakeDataSource.m in Sources */,

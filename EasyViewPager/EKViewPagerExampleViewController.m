@@ -8,6 +8,7 @@
 
 #import "EKViewPagerExampleViewController.h"
 #import "EKContainerViewController.h"
+#import "EKTabHost.h"
 
 @interface EKViewPagerExampleViewController ()
 
@@ -20,6 +21,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[EKTabHost appearance] setTitleFont:[UIFont systemFontOfSize:14.0]];
+    [[EKTabHost appearance] setTitleColor:[UIColor blueColor]];
+    [[EKTabHost appearance] setSelectedColor:[UIColor redColor]];
+    
     [self.viewPager reloadData];
 }
 
@@ -44,21 +50,6 @@
 - (void)viewPager:(EKViewPager *)viewPager tabHostClickedAtIndex:(NSInteger)index
 {
     NSLog(@"Clicked at %d", index);
-}
-
-- (UIColor *)viewPager:(EKViewPager *)viewPager selectedColorForTabHostAtIndex:(NSInteger)index
-{
-    return [UIColor redColor];
-}
-
-- (UIColor *)viewPager:(EKViewPager *)viewPager titleColorForTabHostAtIndex:(NSInteger)index
-{
-    return [UIColor redColor];
-}
-
-- (UIFont *)viewPager:(EKViewPager *)viewPager titleFontForTabHostAtIndex:(NSInteger)index
-{
-    return [UIFont systemFontOfSize:14.0f];
 }
 
 @end
