@@ -47,6 +47,20 @@
     self.selectedIndex = 0;
 }
 
+- (void) layoutSubviews {
+    CGFloat width = [self tabHostWidthWithCapacity:[self.tabs count]] * [self.tabs count];
+    CGFloat height = CGRectGetHeight(self.scrollView.frame);
+    self.scrollView.contentSize = CGSizeMake(width, height);
+    self.scrollView.frame = self.bounds;
+    
+    NSInteger capacity = [self.dataSource numberOfTabHostsWithContainer:self];
+    for (int i=0; i<_tabsArray.count; i++) {
+        EKTabHost* tab = [_tabsArray objectAtIndex:i];
+        CGFloat width = [self tabHostWidthWithCapacity:capacity];
+        tab.frame = CGRectMake(width * i, 0, width, height);
+    }
+}
+
 - (void)reloadData
 {
     [self checkIfDataSourceIsSet];

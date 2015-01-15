@@ -58,6 +58,25 @@
     
 }
 
+- (void) layoutSubviews {
+    self.tabHostsContainer.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), 44.0f);
+    [self.tabHostsContainer layoutSubviews];
+    
+    CGRect contentFrame = CGRectMake(0, CGRectGetHeight(self.tabHostsContainer.frame), CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - CGRectGetHeight(self.tabHostsContainer.frame));
+    self.contentView.frame = contentFrame;
+    
+    for (int index =0;index<self.contents.count;index++) {
+        UIView* view = [self.contents objectAtIndex:index];
+        CGRect bounds = self.bounds;
+        bounds.origin.x = index * CGRectGetWidth(bounds);
+        view.frame = bounds;
+        [view layoutSubviews];
+    }
+    CGFloat width = CGRectGetWidth(self.bounds) * [self.contents count];
+    CGFloat height = CGRectGetHeight(self.contentView.bounds);
+    self.contentView.contentSize = CGSizeMake(width, height);
+}
+
 - (void)reloadData
 {
     _currentIndex = 0;
