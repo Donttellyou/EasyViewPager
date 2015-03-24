@@ -67,7 +67,8 @@
     
     for (int index =0;index<self.contents.count;index++) {
         UIView* view = [self.contents objectAtIndex:index];
-        CGRect bounds = self.bounds;
+        contentFrame.origin.y = 0;
+        CGRect bounds = contentFrame;
         bounds.origin.x = index * CGRectGetWidth(bounds);
         view.frame = bounds;
         [view layoutSubviews];
@@ -85,21 +86,22 @@
     [[self.tabHostsContainer.tabs firstObject] setSelected:YES];
     
     [[self.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-
+    
     [self createPages];
 }
 
 - (void)createPages
 {
     NSInteger capacity  = [self.dataSource numberOfItemsForViewPager:self];
+    CGRect contentFrame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - CGRectGetHeight(self.tabHostsContainer.frame));
     _contentControllers = [NSMutableArray arrayWithCapacity:capacity];
     for (NSInteger i = 0; i < capacity; i++) {
         
         UIViewController *controller = [self.dataSource viewPager:self controllerAtIndex:i];
         
         UIView *controllerView = controller.view;
-        CGRect frame = controllerView.frame;
-        frame.origin.x = i * CGRectGetWidth(controllerView.bounds);
+        CGRect frame = contentFrame;
+        frame.origin.x = i * CGRectGetWidth(self.bounds);
         controllerView.frame = frame;
         
         [_contentControllers addObject:controllerView];
@@ -140,12 +142,7 @@
 - (void)tabHostsContainer:(EKTabHostsContainer *)container didSelectTabHostAtIndex:(NSInteger)index
 {
     if (self.currentIndex != index) {
-        
-        if (index > self.currentIndex) {
-            self.currentIndex++;
-        } else {
-            self.currentIndex--;
-        }
+        self.currentIndex = index;
         
         [UIView animateWithDuration:0.2 animations:^{
             CGPoint point = [[self.contentControllers objectAtIndex:self.currentIndex] frame].origin;
