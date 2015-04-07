@@ -58,6 +58,7 @@
         EKTabHost* tab = [_tabsArray objectAtIndex:i];
         CGFloat width = [self tabHostWidthWithCapacity:capacity];
         tab.frame = CGRectMake(width * i, 0, width, height);
+        [tab layoutSubviews];
     }
 }
 
