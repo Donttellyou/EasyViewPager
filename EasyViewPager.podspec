@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary      = 'A ViewPager port to iOS'
   s.homepage     = 'https://github.com/zzycami/EasyViewPager.git'
   s.author       = { 'Lucas Medeiros' => 'medeiros@cb3.vc' }
-  s.source       = { :git => 'https://github.com/zzycami/EasyViewPager.git', :tag => '0.2.1' }
+  s.source       = { :git => 'https://github.com/zzycami/EasyViewPager.git'}
   s.description  = 'An Android ViewPager component port to iOS'
   s.requires_arc = true
   s.platform     = :ios, '6.1'
